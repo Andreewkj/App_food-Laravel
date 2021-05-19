@@ -42,6 +42,23 @@ class FoodController extends Controller
             'category' => 'required',
             'image' => 'required|mimes:png,jpeg,jpg'
         ]);
+        
+        //process to make upload.
+
+        $image = $request->file('image');
+        $name = time(). '.'. $image->getClientOriginalExtension();
+        $destinationPath = public_path('/images');
+        $image->move($destinationPath,$name);
+
+        Food::create([
+            'name'=>$request->get('name'),
+            'description'=>$request->get('description'),
+            'price'=>$request->get('price'),
+            'category_id'=>$request->get('category'),
+            'image'=>$name
+        ]);
+
+        return redirect()->back()->with('message', 'Food Created');
     }
 
     /**
