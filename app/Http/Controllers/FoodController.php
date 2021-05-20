@@ -14,7 +14,8 @@ class FoodController extends Controller
      */
     public function index()
     {
-        return "aqui index";
+        $foods = Food::latest()->get();
+        return view('food.index', compact('foods'));
     }
 
     /**
