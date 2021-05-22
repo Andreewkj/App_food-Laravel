@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+
+    svg{
+        width: 20px;
+    }
+
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -39,8 +46,8 @@
                         <td><img src="{{asset('images')}}/{{$food->image}}" width="70"></td>
                         <td>{{$food->name}}</td>
                         <td>{{$food->description}}</td>
-                        <td>{{$food->price}}</td>
-                        <td>{{$food->category_id}}</td>
+                        <td>${{$food->price}}</td>
+                        <td>{{$food->category->name}}</td>
                         <td>
                             <a href="{{route('food.edit',[$food->id])}}"><button class="btn btn-outline-success">Edit</button></a>
                         </td>
@@ -82,6 +89,7 @@
                         @endif
                     </tbody>
                     </table>
+                    {{$foods->links()}}
             </div>
 
         </div>
